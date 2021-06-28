@@ -59,7 +59,7 @@ class App extends Component {
   handleLogin(data) {
     this.setState({
       loggedInStatus: 'LOGGED_IN',
-      user: data.user,
+      user: data.user.email,
     });
   }
   render() {
@@ -76,6 +76,7 @@ class App extends Component {
                   handleLogin={this.handleLogin}
                   handleLogout={this.handleLogout}
                   loggedInStatus={this.state.loggedInStatus}
+                  user={this.state.user.email}
                 />
               )}
             />
@@ -86,6 +87,7 @@ class App extends Component {
                 <Dashboard
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}
+                  user={this.state.user.email}
                 />
               )}
             />
