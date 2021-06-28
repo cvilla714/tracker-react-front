@@ -12,6 +12,7 @@ class Home extends Component {
   }
 
   handleSuccessfulAuth(data) {
+    console.log(data.user);
     this.props.handleLogin(data);
     this.props.history.push('/dashboard');
   }
@@ -32,6 +33,8 @@ class Home extends Component {
       <div>
         <h1>Home</h1>
         <h1>Status: {this.props.loggedInStatus}</h1>
+        {/* <h1>Status: {this.props.user}</h1> */}
+        <h2>User : {this.props.user}</h2>
         <button onClick={() => this.handleLogoutClick()}>Logout</button>
         <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} />
         <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />
