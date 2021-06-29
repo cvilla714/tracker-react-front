@@ -1,33 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-export default class Registration extends Component {
-  constructor(props) {
-    super(props);
+const Registration = (props) => {
+  // constructor(props) {
+  //   super(props);
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    password_confirmation: '',
+    registrationErrors: '',
+  });
 
-    this.state = {
-      email: '',
-      password: '',
-      password_confirmation: '',
-      registrationErrors: '',
-    };
+  // this.state = {
+  //     email: '',
+  //     password: '',
+  //     password_confirmation: '',
+  //     registrationErrors: '',
+  //   };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlChange = this.handlChange.bind(this);
-  }
+  //   this.handleSubmit = this.handleSubmit.bind(this);
+  //   this.handlChange = this.handlChange.bind(this);
+  const { email, password, password_confirmation } = user;
 
-  handlChange(event) {
+  const handlChange = (event) => {
     // console.log('handle change', event);
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  }
+    setUser({ ...user, [event.target.name]: event.target.value });
+    // this.setState({
+    //   [event.target.name]: event.target.value,
+    // });
+  };
 
-  handleSubmit(event) {
+  const handleSubmit = (event) => {
     // console.log('form submitted');
     // console.log(event);
-
-    const { email, password, password_confirmation } = this.state;
 
     axios
       .post(
@@ -44,48 +49,49 @@ export default class Registration extends Component {
       .then((response) => {
         // console.log('registration res', response);
         if (response.data.status === 'created') {
-          this.props.handleSuccessfulAuth(response.data);
+          props.handleSuccessfulAuth(response.data);
         }
       })
       .catch((error) => {
         console.log('registration error', error);
       });
     event.preventDefault();
-  }
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handlChange}
-            required
-          />
+  };
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handlChange}
-            required
-          />
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={handlChange}
+          required
+        />
 
-          <input
-            type="password"
-            name="password_confirmation"
-            placeholder="Confirm Password"
-            value={this.state.password_confirmation}
-            onChange={this.handlChange}
-            required
-          />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlChange}
+          required
+        />
 
-          <button tupe="submit">Register</button>
-        </form>
-      </div>
-    );
-  }
-}
+        <input
+          type="password"
+          name="password_confirmation"
+          placeholder="Confirm Password"
+          value={password_confirmation}
+          onChange={handlChange}
+          required
+        />
+
+        <button tupe="submit">Register</button>
+      </form>
+    </div>
+  );
+};
+
+export default Registration;
