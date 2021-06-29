@@ -1,32 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
+const Login = (props) => {
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      email: '',
-      password: '',
-      loginErrors: '',
-    };
+  const [userInfo, setUserInfo] = useState({
+    email: '',
+    password: '',
+    loginErrors: '',
+  });
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlChange = this.handlChange.bind(this);
-  }
+  // this.state = {
+  //     email: '',
+  //     password: '',
+  //     loginErrors: '',
+  //   };
 
-  handlChange(event) {
+  // this.handleSubmit = this.handleSubmit.bind(this);
+  // this.handlChange = this.handlChange.bind(this);
+
+  const { email, password } = userInfo;
+
+  const handlChange = (event) => {
     // console.log('handle change', event);
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  }
+    setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
 
-  handleSubmit(event) {
+    // this.setState({
+    //   [event.target.name]: event.target.value,
+    // });
+  };
+
+  const handleSubmit = (event) => {
     // console.log('form submitted');
     // console.log(event);
-
-    const { email, password } = this.state;
 
     axios
       .post(
@@ -42,39 +49,40 @@ export default class Login extends Component {
       .then((response) => {
         // console.log('response from login', response);
         if (response.data.logged_in === true) {
-          this.props.handleSuccessfulAuth(response.data);
+          props.handleSuccessfulAuth(response.data);
         }
       })
       .catch((error) => {
         console.log(' login error', error);
       });
     event.preventDefault();
-  }
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handlChange}
-            required
-          />
+  };
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handlChange}
-            required
-          />
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={handlChange}
+          required
+        />
 
-          <button tupe="submit">Login</button>
-        </form>
-      </div>
-    );
-  }
-}
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlChange}
+          required
+        />
+
+        <button tupe="submit">Login</button>
+      </form>
+    </div>
+  );
+};
+
+export default Login;
