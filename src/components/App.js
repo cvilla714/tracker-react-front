@@ -10,18 +10,11 @@ const App = () => {
     loggedInStatus: 'NOT_LOGGED_IN',
     user: {},
   });
-  // this.state = {
-  //   loggedInStatus: 'NOT_LOGGED_IN',
-  //   user: {},
-  // };
-  // this.handleLogin = this.handleLogin.bind(this);
-  // this.handleLogout = this.handleLogout.bind(this);
 
   const checkLoginStatus = () => {
     axios
       .get('http://localhost:3001/logged_in', { withCredentials: true })
       .then((response) => {
-        // console.log('logged in ?', response);
         if (
           response.data.logged_in === true &&
           loggedInfo.loggedInStatus === 'NOT_LOGGED_IN'
@@ -50,10 +43,6 @@ const App = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // componentDidMount() {
-  //   this.checkLoginStatus();
-  // }
 
   const handleLogout = () => {
     setloggInStatus({

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const Registration = (props) => {
-  // constructor(props) {
-  //   super(props);
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -11,29 +9,13 @@ const Registration = (props) => {
     registrationErrors: '',
   });
 
-  // this.state = {
-  //     email: '',
-  //     password: '',
-  //     password_confirmation: '',
-  //     registrationErrors: '',
-  //   };
-
-  //   this.handleSubmit = this.handleSubmit.bind(this);
-  //   this.handlChange = this.handlChange.bind(this);
   const { email, password, password_confirmation } = user;
 
   const handlChange = (event) => {
-    // console.log('handle change', event);
     setUser({ ...user, [event.target.name]: event.target.value });
-    // this.setState({
-    //   [event.target.name]: event.target.value,
-    // });
   };
 
   const handleSubmit = (event) => {
-    // console.log('form submitted');
-    // console.log(event);
-
     axios
       .post(
         'http://localhost:3001/registrations',
@@ -47,7 +29,6 @@ const Registration = (props) => {
         { withCredentials: true },
       )
       .then((response) => {
-        // console.log('registration res', response);
         if (response.data.status === 'created') {
           props.handleSuccessfulAuth(response.data);
         }
