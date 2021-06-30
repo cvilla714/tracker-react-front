@@ -1,9 +1,34 @@
-import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const getUsers = createAsyncThunk('registration/getUsers', async () => {
+  return axios
+    .post(
+      'http://localhost:3001/registrations',
+      {
+        user: {
+          email,
+          password,
+          password_confirmation,
+        },
+      },
+      { withCredentials: true },
+    )
+    .then((response) => {
+      if (response.data.status === 'created') {
+        return response.data;
+      }
+    });
+});
 
 const initialState = {
-  email: '',
-  password: '',
-  password_confirmation: '',
+  user: {
+    email: '',
+    password: '',
+    password_confirmation: '',
+  },
+  loading: false,
+  error: null,
 };
 
 const registrationSlice = createSlice({
@@ -22,9 +47,23 @@ const registrationSlice = createSlice({
       const { name, value } = action.payload;
       state[name] = value;
     },
+    extrareducers: {
+      [getUsers.pending]: (state, action) => {
+        state.loading = true;
+      },
+      [getUsers.fulfilled]: (state, action) => {
+        state.user = action.payload;
+        state.loading = false;
+      },
+      [getUsers.rejected]: (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      },
+    },
   },
 });
 
-export const { setUsers, setUserProperty } = registrationSlice.actions;
+export const { setUsers, setUserProperty, getUsers } =
+  registrationSlice.actions;
 
 export default registrationSlice.reducer;
