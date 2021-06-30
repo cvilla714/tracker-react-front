@@ -1,46 +1,30 @@
-import React from 'react';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { setUserProperty } from '../../features/user/registrationSlice';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createUser,
+  selectIsRegistrationLoading,
+  setUserProperty,
+} from "../../features/user/registrationSlice";
 
 const Registration = (props) => {
   const dispatch = useDispatch();
+  const isRegistering = useSelector(selectIsRegistrationLoading);
 
   const user = useSelector((state) => state);
 
   const { email, password, password_confirmation } = user;
-  const handlChange = (event) => {
+
+  const handleChange = (event) => {
     dispatch(
       setUserProperty({
         name: event.target.name,
         value: event.target.value,
-      }),
+      })
     );
   };
 
-  const handleSubmit = (event) => {
-    axios
-      .post(
-        'http://localhost:3001/registrations',
-        {
-          user: {
-            email,
-            password,
-            password_confirmation,
-          },
-        },
-        { withCredentials: true },
-      )
-      .then((response) => {
-        if (response.data.status === 'created') {
-          props.handleSuccessfulAuth(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log('registration error', error);
-      });
-    event.preventDefault();
-  };
+  // you should use local state and pass the user values into arg. it's unnecessary to keep form state in redux.
+  const handleSubmit = (event) => dispatch(createUser());
 
   return (
     <div>
@@ -50,7 +34,7 @@ const Registration = (props) => {
           name="email"
           placeholder="Email"
           value={email}
-          onChange={handlChange}
+          onChange={handleChange}
           required
         />
 
@@ -59,7 +43,7 @@ const Registration = (props) => {
           name="password"
           placeholder="Password"
           value={password}
-          onChange={handlChange}
+          onChange={handleChange}
           required
         />
 
@@ -68,11 +52,13 @@ const Registration = (props) => {
           name="password_confirmation"
           placeholder="Confirm Password"
           value={password_confirmation}
-          onChange={handlChange}
+          onChange={handleChange}
           required
         />
 
-        <button tupe="submit">Register</button>
+        <button type="submit" disabled={isRegistering}>
+          {isRegistering ? "Registering..." : "Register"}
+        </button>
       </form>
     </div>
   );
