@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import Registration from './auth/Registration';
-import Login from './auth/Login';
+import Registration from '../containers/auth/Registration';
+import Login from '../containers/auth/Login';
 
 const Home = (props) => {
   const handleSuccessfulAuth = (data) => {
