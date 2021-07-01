@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setUserProperty,
@@ -12,6 +11,7 @@ const Registration = (props) => {
   const user = useSelector((state) => state);
 
   const { email, password, password_confirmation } = user;
+
   const handlChange = (event) => {
     dispatch(
       setUserProperty({
