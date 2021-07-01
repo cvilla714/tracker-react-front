@@ -1,7 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLoginProperty } from '../../features/user/loginSlice';
+import { setLoginProperty, loginUsers } from '../../features/user/loginSlice';
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -20,25 +19,7 @@ const Login = (props) => {
   };
 
   const handleSubmit = (event) => {
-    axios
-      .post(
-        'http://localhost:3001/sessions',
-        {
-          user: {
-            email: email,
-            password: password,
-          },
-        },
-        { withCredentials: true },
-      )
-      .then((response) => {
-        if (response.data.logged_in === true) {
-          props.handleSuccessfulAuth(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log(' login error', error);
-      });
+    dispatch(loginUsers());
     event.preventDefault();
   };
 
