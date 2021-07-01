@@ -27,9 +27,11 @@ export const getUsers = createAsyncThunk(
   },
 );
 const initialState = {
-  email: '',
-  password: '',
-  password_confirmation: '',
+  user: {
+    email: '',
+    password: '',
+    password_confirmation: '',
+  },
   loading: false,
   error: null,
 };
@@ -40,7 +42,7 @@ const registrationSlice = createSlice({
   reducers: {
     setUsers: (state, action) => {
       const { email, password, password_confirmation } = action.payload;
-      state = {
+      state.user = {
         email,
         password,
         password_confirmation,
@@ -48,7 +50,7 @@ const registrationSlice = createSlice({
     },
     setUserProperty: (state, action) => {
       const { name, value } = action.payload;
-      state[name] = value;
+      state.user[name] = value;
     },
   },
   extraReducers: {
