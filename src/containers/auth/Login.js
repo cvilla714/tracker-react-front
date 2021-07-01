@@ -1,10 +1,14 @@
 import React from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserProperty } from '../../features/user/loginSlice';
+import {
+  loginUser,
+  setUserProperty,
+  selectIsLoginLoading,
+} from '../../features/user/loginSlice';
 
 const Login = (props) => {
   const dispatch = useDispatch();
+  const isLoginLoading = useSelector(selectIsLoginLoading);
   const user = useSelector((state) => state);
   const { email, password } = user;
 
@@ -18,26 +22,7 @@ const Login = (props) => {
   };
 
   const handleSubmit = (event) => {
-    axios
-      .post(
-        'http://localhost:3001/sessions',
-        {
-          user: {
-            email: email,
-            password: password,
-          },
-        },
-        { withCredentials: true },
-      )
-      .then((response) => {
-        // console.log('response from login', response);
-        if (response.data.logged_in === true) {
-          props.handleSuccessfulAuth(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log(' login error', error);
-      });
+    dispatch(loginUser());
     event.preventDefault();
   };
 
@@ -62,7 +47,9 @@ const Login = (props) => {
           required
         />
 
-        <button tupe="submit">Login</button>
+        <button type="submit" disabled={isLoginLoading}>
+          {isLoginLoading ? 'Loggin you in...' : 'Log in'}{' '}
+        </button>
       </form>
     </div>
   );
