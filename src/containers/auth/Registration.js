@@ -1,10 +1,10 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   createUser,
   selectIsRegistrationLoading,
   setUserProperty,
-} from "../../features/user/registrationSlice";
+} from '../../features/user/registrationSlice';
 
 const Registration = (props) => {
   const dispatch = useDispatch();
@@ -19,12 +19,15 @@ const Registration = (props) => {
       setUserProperty({
         name: event.target.name,
         value: event.target.value,
-      })
+      }),
     );
   };
 
   // you should use local state and pass the user values into arg. it's unnecessary to keep form state in redux.
-  const handleSubmit = (event) => dispatch(createUser());
+  const handleSubmit = (event) => {
+    dispatch(createUser());
+    event.preventDefault();
+  };
 
   return (
     <div>
@@ -57,7 +60,7 @@ const Registration = (props) => {
         />
 
         <button type="submit" disabled={isRegistering}>
-          {isRegistering ? "Registering..." : "Register"}
+          {isRegistering ? 'Registering...' : 'Register'}
         </button>
       </form>
     </div>
