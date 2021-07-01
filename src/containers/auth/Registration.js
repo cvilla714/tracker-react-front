@@ -1,30 +1,30 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+// import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  createUser,
-  selectIsRegistrationLoading,
   setUserProperty,
-} from "../../features/user/registrationSlice";
+  getUsers,
+} from '../../features/user/registrationSlice';
 
 const Registration = (props) => {
   const dispatch = useDispatch();
-  const isRegistering = useSelector(selectIsRegistrationLoading);
 
   const user = useSelector((state) => state);
 
   const { email, password, password_confirmation } = user;
-
-  const handleChange = (event) => {
+  const handlChange = (event) => {
     dispatch(
       setUserProperty({
         name: event.target.name,
         value: event.target.value,
-      })
+      }),
     );
   };
 
-  // you should use local state and pass the user values into arg. it's unnecessary to keep form state in redux.
-  const handleSubmit = (event) => dispatch(createUser());
+  const handleSubmit = (event) => {
+    dispatch(getUsers());
+    event.preventDefault();
+  };
 
   return (
     <div>
@@ -34,7 +34,7 @@ const Registration = (props) => {
           name="email"
           placeholder="Email"
           value={email}
-          onChange={handleChange}
+          onChange={handlChange}
           required
         />
 
@@ -43,7 +43,7 @@ const Registration = (props) => {
           name="password"
           placeholder="Password"
           value={password}
-          onChange={handleChange}
+          onChange={handlChange}
           required
         />
 
@@ -52,13 +52,11 @@ const Registration = (props) => {
           name="password_confirmation"
           placeholder="Confirm Password"
           value={password_confirmation}
-          onChange={handleChange}
+          onChange={handlChange}
           required
         />
 
-        <button type="submit" disabled={isRegistering}>
-          {isRegistering ? "Registering..." : "Register"}
-        </button>
+        <button tupe="submit">Register</button>
       </form>
     </div>
   );
