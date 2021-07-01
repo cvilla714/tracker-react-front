@@ -4,8 +4,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const getUsers = createAsyncThunk(
   'registration/getUsers',
   async (arg, { getState }) => {
-    const { user } = getState(); // state.user
-    const { email, password, password_confirmation } = user;
+    const {
+      registration: {
+        user: { email, password, password_confirmation },
+      },
+    } = getState();
 
     return axios
       .post(
@@ -26,6 +29,7 @@ export const getUsers = createAsyncThunk(
       });
   },
 );
+
 const initialState = {
   user: {
     email: '',
