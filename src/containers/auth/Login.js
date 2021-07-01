@@ -1,40 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserProperty } from '../../features/user/loginSlice';
 
 const Login = (props) => {
-  // constructor(props) {
-  //   super(props);
-
-  const [userInfo, setUserInfo] = useState({
-    email: '',
-    password: '',
-    loginErrors: '',
-  });
-
-  // this.state = {
-  //     email: '',
-  //     password: '',
-  //     loginErrors: '',
-  //   };
-
-  // this.handleSubmit = this.handleSubmit.bind(this);
-  // this.handlChange = this.handlChange.bind(this);
-
-  const { email, password } = userInfo;
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state);
+  const { email, password } = user;
 
   const handlChange = (event) => {
-    // console.log('handle change', event);
-    setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
-
-    // this.setState({
-    //   [event.target.name]: event.target.value,
-    // });
+    dispatch(
+      setUserProperty({
+        name: event.target.name,
+        value: event.target.value,
+      }),
+    );
   };
 
   const handleSubmit = (event) => {
-    // console.log('form submitted');
-    // console.log(event);
-
     axios
       .post(
         'http://localhost:3001/sessions',
