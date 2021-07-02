@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Registration from '../containers/auth/Registration';
 import Login from '../containers/auth/Login';
+import ExpenseItem from './ExpenseItem';
 
 const Home = (props) => {
   const handleSuccessfulAuth = (data) => {
@@ -31,6 +32,7 @@ const Home = (props) => {
       <button onClick={() => handleLogoutClick()}>Logout</button>
       <Registration handleSuccessfulAuth={handleSuccessfulAuth} />
       <Login handleSuccessfulAuth={handleSuccessfulAuth} />
+      <ExpenseItem />
     </div>
   );
 };
