@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Registration from '../containers/auth/Registration';
 import Login from '../containers/auth/Login';
 import ExpenseItem from './ExpenseItem';
@@ -24,14 +25,26 @@ const Home = (props) => {
     props.handleLogout();
   };
 
+  // const authLinks ={
+  //   <Fragment>
+
+  //   </Fragment>
+  // }
+
   return (
     <div>
       <Navbar bg="primary" variant="dark">
         <Navbar.Brand href="#home">Expenses Tracker</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
+          <Link to="/" className="text-light">
+            Home
+          </Link>
+          <Link to="/register" className="text-white mx-2">
+            Register
+          </Link>
+          <Link to="/login" className="text-light">
+            Login
+          </Link>
         </Nav>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
