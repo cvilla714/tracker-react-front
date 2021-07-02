@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
+import NavigationBar from './Navbar';
 import Home from './Home';
 import Dashboard from './Dashboard';
-
+import Registration from '../containers/auth/Registration';
+import Login from '../containers/auth/Login';
 const App = () => {
   const [loggedInfo, setloggInStatus] = useState({
     loggedInStatus: 'NOT_LOGGED_IN',
@@ -61,6 +63,7 @@ const App = () => {
   return (
     <div className="App">
       <Router>
+        <NavigationBar />
         <Switch>
           <Route
             exact
@@ -86,6 +89,8 @@ const App = () => {
               />
             )}
           />
+          <Route exact path={'/register'} component={Registration} />
+          <Route exact path={'/login'} component={Login} />
         </Switch>
       </Router>
     </div>
