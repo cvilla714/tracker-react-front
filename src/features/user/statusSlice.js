@@ -1,16 +1,20 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import axios from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+// import axios from 'axios';
 
-export const checkLoginStatus = createApi({
+export const checkLoginStatusapi = createApi({
   reducerPath: 'checkLoginStatus',
-  baseQuery: axios.get('http://localhost:3001/', {
-    withCredentials: true,
+  // baseQuery: axios.get('http://localhost:3001/', {
+  //   withCredentials: true,
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:3001',
+    credentials: 'include',
   }),
+
   endpoints: (builder) => ({
     getLoginUserInfo: builder.query({
-      query: (email) => `logged_in/${email}`,
+      query: () => `logged_in/`,
     }),
   }),
 });
 
-export const { useGetLoginUserInfo } = checkLoginStatus;
+export const { useGetLoginUserInfoQuery } = checkLoginStatusapi;
