@@ -7,6 +7,7 @@ import Home from './Home';
 import Dashboard from './Dashboard';
 import Registration from '../containers/auth/Registration';
 import Login from '../containers/auth/Login';
+
 const App = () => {
   const [loggedInfo, setloggInStatus] = useState({
     loggedInStatus: 'NOT_LOGGED_IN',
@@ -25,6 +26,7 @@ const App = () => {
             loggedInStatus: 'LOGGED_IN',
             user: response.data.user,
           });
+          console.log(response.data.user);
         } else if (
           !response.data.logged_in &&
           loggedInfo.loggedInStatus === 'LOGGED_IN'
@@ -63,7 +65,7 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <NavigationBar />
+        <NavigationBar useremail={loggedInfo.user.email} />
         <Switch>
           <Route
             exact
@@ -85,7 +87,6 @@ const App = () => {
               <Dashboard
                 {...props}
                 loggedInStatus={loggedInfo.loggedInStatus}
-                user={loggedInfo.user.email}
               />
             )}
           />
