@@ -24,7 +24,6 @@ const Registration = (props) => {
     );
   };
 
-  // you should use local state and pass the user values into arg. it's unnecessary to keep form state in redux.
   const handleSubmit = (event) => {
     dispatch(createUser());
     event.preventDefault();
@@ -74,38 +73,6 @@ const Registration = (props) => {
           {isRegistering ? 'Registering...' : 'Register'}
         </Button>
       </Form>
-      {/* <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={password}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="password"
-          name="password_confirmation"
-          placeholder="Confirm Password"
-          value={password_confirmation}
-          onChange={handleChange}
-          required
-        />
-
-        <button type="submit" disabled={isRegistering}>
-          {isRegistering ? 'Registering...' : 'Register'}
-        </button>
-      </form> */}
     </div>
   );
 };
