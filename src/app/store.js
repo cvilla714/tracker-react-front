@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import registrationReducer from '../features/user/registrationSlice';
 import loginReducer from '../features/user/loginSlice';
-import { checkLoginStatus } from '../features/user/statusSlice';
+import { checkLoginStatusapi } from '../features/user/statusSlice';
 // import usersReducer from '../features/user/statusSlice';
 
 export const store = configureStore({
@@ -10,9 +10,9 @@ export const store = configureStore({
     registration: registrationReducer,
     login: loginReducer,
     // users: usersReducer,
-    [checkLoginStatus.reducerPath]: checkLoginStatus.reducer,
+    [checkLoginStatusapi.reducerPath]: checkLoginStatusapi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(checkLoginStatus.middleware);
+    return getDefaultMiddleware().concat(checkLoginStatusapi.middleware);
   },
 });
