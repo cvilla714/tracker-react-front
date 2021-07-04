@@ -1,22 +1,28 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useGetLoginUserInfoQuery } from '../features/user/statusSlice';
+// import axios from 'axios';
+import {
+  useGetLoginUserInfoQuery,
+  useLogoutUserMutation,
+} from '../features/user/statusSlice';
 
 const NavigationBar = (props) => {
-  const handleLogoutClick = () => {
-    axios
-      .delete('http://localhost:3001/logout', { withCredentials: true })
-      .then((response) => {
-        props.handleLogout();
-      })
-      .catch((error) => {
-        console.log('logout error', error);
-      });
-    props.handleLogout();
-  };
+  // const handleLogoutClick = () => {
+  //   axios
+  //     .delete('http://localhost:3001/logout', { withCredentials: true })
+  //     .then((response) => {
+  //       console.log(response);
+  //       return response;
+  //     })
+  //     .catch((error) => {
+  //       console.log('logout error', error);
+  //     });
+  //   // props.handleLogout();
+  //   // response.data.user = {};
+  // };
   const { data, error, isLoading } = useGetLoginUserInfoQuery();
+  const [logoutUser] = useLogoutUserMutation();
   return (
     <div>
       <Navbar bg="primary" variant="dark">
@@ -36,7 +42,8 @@ const NavigationBar = (props) => {
               href="?"
               className="text-light mx-2"
               // onClick={(e) => handleLogout(e)}
-              onClick={() => handleLogoutClick()}
+              // onClick={() => handleLogoutClick()}
+              onClick={() => logoutUser()}
             >
               {' '}
               Logout
