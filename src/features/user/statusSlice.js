@@ -14,7 +14,16 @@ export const checkLoginStatusapi = createApi({
     getLoginUserInfo: builder.query({
       query: () => `logged_in/`,
     }),
+    logoutUser: builder.mutation({
+      query() {
+        return {
+          url: `logout`,
+          method: 'DELETE',
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetLoginUserInfoQuery } = checkLoginStatusapi;
+export const { useGetLoginUserInfoQuery, useLogoutUserMutation } =
+  checkLoginStatusapi;
