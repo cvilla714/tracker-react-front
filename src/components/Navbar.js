@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import { useGetLoginUserInfo } from '../features/user/statusSlice';
+import { useGetLoginUserInfoQuery } from '../features/user/statusSlice';
 
 const NavigationBar = (props) => {
   const handleLogoutClick = () => {
@@ -16,7 +16,7 @@ const NavigationBar = (props) => {
       });
     props.handleLogout();
   };
-  // const { data, error, isLoading } = useGetLoginUserInfo();
+  const { data, error, isLoading } = useGetLoginUserInfoQuery();
   return (
     <div>
       <Navbar bg="primary" variant="dark">
@@ -45,7 +45,20 @@ const NavigationBar = (props) => {
         </Nav>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>Hello: {props.useremail}</Navbar.Text>
+          {error ? (
+            <>Oh no, there was an error</>
+          ) : isLoading ? (
+            <>Loading...</>
+          ) : data.logged_in ? (
+            <>
+              <Navbar.Text>Hello: {data.user.email}</Navbar.Text>
+              {/* <h3>{data.species.name}</h3> */}
+              {/* <img src={data.sprites.front_shiny} alt={data.species.name} /> */}
+            </>
+          ) : (
+            <Navbar.Text>Hello: Guess </Navbar.Text>
+          )}
+          {/* <Navbar.Text>Hello: {props.useremail}</Navbar.Text> */}
         </Navbar.Collapse>
       </Navbar>
     </div>
