@@ -45,14 +45,6 @@ const registrationSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
-    setUsers: (state, action) => {
-      const { email, password, password_confirmation } = action.payload;
-      state.user = {
-        email,
-        password,
-        password_confirmation,
-      };
-    },
     setUserProperty: (state, action) => {
       const { name, value } = action.payload;
       state.user[name] = value;
