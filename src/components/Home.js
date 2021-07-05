@@ -1,7 +1,8 @@
 import React from 'react';
-import ExpenseItem from './ExpenseItem';
+// import ExpenseItem from './ExpenseItem';
+import Expenses from './Expenses';
 
-const Home = (props) => {
+const Home = () => {
   const expenses = [
     {
       id: 'e1',
@@ -26,7 +27,9 @@ const Home = (props) => {
   return (
     <div>
       <h1>Home</h1>
-      <ExpenseItem
+
+      <Expenses expenses={expenses} />
+      {/* <ExpenseItem
         title={expenses[0].title}
         amount={expenses[0].amount}
         date={expenses[0].date}
@@ -45,7 +48,7 @@ const Home = (props) => {
         title={expenses[3].title}
         amount={expenses[3].amount}
         date={expenses[3].date}
-      />
+      /> */}
     </div>
   );
 };
