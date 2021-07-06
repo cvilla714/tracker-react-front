@@ -8,19 +8,6 @@ import {
 } from '../features/user/statusSlice';
 
 const NavigationBar = (props) => {
-  // const handleLogoutClick = () => {
-  //   axios
-  //     .delete('http://localhost:3001/logout', { withCredentials: true })
-  //     .then((response) => {
-  //       console.log(response);
-  //       return response;
-  //     })
-  //     .catch((error) => {
-  //       console.log('logout error', error);
-  //     });
-  //   // props.handleLogout();
-  //   // response.data.user = {};
-  // };
   const { data, error, isLoading } = useGetLoginUserInfoQuery();
   const [logoutUser] = useLogoutUserMutation();
   return (
@@ -41,8 +28,6 @@ const NavigationBar = (props) => {
             <a
               href="?"
               className="text-light mx-2"
-              // onClick={(e) => handleLogout(e)}
-              // onClick={() => handleLogoutClick()}
               onClick={() => logoutUser()}
             >
               {' '}
