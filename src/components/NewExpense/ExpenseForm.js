@@ -45,6 +45,7 @@ const ExpenseForm = (props) => {
             name="enterTitle"
             value={enterTitle}
             onChange={titleChangeHandler}
+            required
           />
         </div>
         <div className="new-expense__control">
@@ -56,6 +57,7 @@ const ExpenseForm = (props) => {
             name="enterAmount"
             value={enterAmount}
             onChange={amountHandler}
+            required
           />
         </div>
         <div className="new-expense__control">
@@ -67,6 +69,7 @@ const ExpenseForm = (props) => {
             name="enterDate"
             value={enterDate}
             onChange={datetHandler}
+            required
           />
         </div>
       </div>
