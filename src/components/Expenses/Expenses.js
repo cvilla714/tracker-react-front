@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import ExpenseItem from './ExpenseItem';
+// import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
 import Card from '../Ui/Card';
 import ExpensesFiter from './ExpensesFiter';
+import ExpensesList from './ExpensesList';
 
 const Expenses = (props) => {
   const [filterYear, setFilterYear] = useState('2021');
@@ -15,18 +16,18 @@ const Expenses = (props) => {
     return expense.date.getFullYear().toString() === filterYear;
   });
 
-  let expensesContent = <p className="text-warning">No Expenses found</p>;
+  // let expensesContent = <p className="text-warning">No Expenses found</p>;
 
-  if (filteredExpenses.length > 0) {
-    expensesContent = filteredExpenses.map((expense) => (
-      <ExpenseItem
-        key={expense.id}
-        title={expense.title}
-        amount={expense.amount}
-        date={expense.date}
-      />
-    ));
-  }
+  // if (filteredExpenses.length > 0) {
+  //   expensesContent = filteredExpenses.map((expense) => (
+  //     <ExpenseItem
+  //       key={expense.id}
+  //       title={expense.title}
+  //       amount={expense.amount}
+  //       date={expense.date}
+  //     />
+  //   ));
+  // }
   return (
     <div>
       <Card className="expenses">
@@ -34,8 +35,8 @@ const Expenses = (props) => {
           selected={filterYear}
           onChangeFitler={filterChangeHandler}
         />
-
-        {expensesContent}
+        <ExpensesList items={filteredExpenses} />
+        {/* {expensesContent} */}
         {/* {filteredExpenses.length === 0 ? (
           <p className="text-warning">No Expenses found</p>
         ) : (
