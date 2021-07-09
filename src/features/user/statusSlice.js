@@ -1,10 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import axios from 'axios';
 
 export const checkLoginStatusapi = createApi({
   reducerPath: 'checkLoginStatus',
-  // baseQuery: axios.get('http://localhost:3001/', {
-  //   withCredentials: true,
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3001',
     credentials: 'include',
@@ -22,8 +19,29 @@ export const checkLoginStatusapi = createApi({
         };
       },
     }),
+    getUserExpenses: builder.query({
+      query() {
+        return {
+          url: 'expenses',
+          method: 'GET',
+        };
+      },
+    }),
+    postUserExpenses: builder.mutation({
+      query(body) {
+        return {
+          url: 'expenses',
+          method: 'POST',
+          body,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetLoginUserInfoQuery, useLogoutUserMutation } =
-  checkLoginStatusapi;
+export const {
+  useGetLoginUserInfoQuery,
+  useLogoutUserMutation,
+  useGetUserExpensesQuery,
+  usePostUserExpensesMutation,
+} = checkLoginStatusapi;
