@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
+import { usePostUserExpensesMutation } from '../../features/user/statusSlice';
+import { useGetLoginUserInfoQuery } from '../../features/user/statusSlice';
 
 const ExpenseForm = (props) => {
   const [enterTitle, setEnterTitle] = useState('');
   const [enterAmount, setEnterAmount] = useState('');
   const [enterDate, setEnterDate] = useState('');
+
+  const [postUserExpenses] = usePostUserExpensesMutation();
+  const { data } = useGetLoginUserInfoQuery();
 
   const titleChangeHandler = (e) => {
     setEnterTitle(e.target.value);
@@ -26,10 +31,13 @@ const ExpenseForm = (props) => {
     const expenseData = {
       title: enterTitle,
       amount: +enterAmount,
-      date: new Date(enterDate),
+      date: new Date(enterDate).toLocaleDateString(),
+      user_id: data.user.id,
+      // date: new Date(enterDate),
     };
 
-    props.onSaveExpenseData(expenseData);
+    postUserExpenses(expenseData);
+    // props.onSaveExpenseData(expenseData);
     setEnterTitle('');
     setEnterAmount('');
     setEnterDate('');
