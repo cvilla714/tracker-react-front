@@ -14,7 +14,9 @@ const Expenses = (props) => {
   };
 
   const filteredExpenses = props.items.filter((expense) => {
-    return expense.date.getFullYear().toString() === filterYear;
+    return (
+      expense.date.toLocaleString('en-US', { year: 'numeric' }) === filterYear
+    );
   });
 
   // let expensesContent = <p className="text-warning">No Expenses found</p>;
