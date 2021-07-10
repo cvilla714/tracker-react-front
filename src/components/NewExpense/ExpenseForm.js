@@ -31,9 +31,9 @@ const ExpenseForm = (props) => {
     const expenseData = {
       title: enterTitle,
       amount: +enterAmount,
-      // date: new Date(enterDate).toLocaleDateString(),
+      date: new Date(enterDate).toLocaleDateString(),
       user_id: data.user.id,
-      date: new Date(enterDate),
+      // date: new Date(enterDate),
     };
 
     postUserExpenses(expenseData);
