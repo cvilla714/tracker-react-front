@@ -7,9 +7,15 @@ const ExpenseDate = (props) => {
 
   // console.log({ data });
 
-  const month = props.date.toLocaleString('en-US', { month: 'long' });
-  const day = props.date.toLocaleString('en-US', { day: '2-digit' });
-  const year = props.date.toLocaleString('en-US', { year: 'numeric' });
+  console.log(props.date);
+
+  const newmonth = new Date(props.date);
+  console.log(newmonth);
+  const month = new Date(props.date).toLocaleString('en-US', { month: 'long' });
+  const day = new Date(props.date).toLocaleString('en-US', { day: '2-digit' });
+  const year = new Date(props.date).toLocaleString('en-US', {
+    year: 'numeric',
+  });
   console.log(month);
   return (
     <div className="expense-date">
