@@ -5,14 +5,14 @@ import ExpenseForm from './ExpenseForm';
 const NewExpense = (props) => {
   const [isShowingForm, setIsShowForm] = useState(false);
 
-  const saveExpenseDataHandle = (enteredExpenseData) => {
-    const expenseData = {
-      ...enteredExpenseData,
-      id: Math.random().toString(),
-    };
-    // console.log(expenseData);
-    props.onAddExpense(expenseData);
-  };
+  // const saveExpenseDataHandle = (enteredExpenseData) => {
+  //   const expenseData = {
+  //     ...enteredExpenseData,
+  //     id: Math.random().toString(),
+  //   };
+  //   console.log(expenseData);
+  //   props.onAddExpense(expenseData);
+  // };
 
   const showtheForm = () => {
     setIsShowForm(true);
@@ -25,7 +25,7 @@ const NewExpense = (props) => {
     <div className="new-expense">
       {isShowingForm && (
         <ExpenseForm
-          onSaveExpenseData={saveExpenseDataHandle}
+          // onSaveExpenseData={saveExpenseDataHandle}
           onCancel={stopShowingForm}
         />
       )}
