@@ -5,7 +5,7 @@ import { useGetUserExpensesQuery } from '../../features/user/statusSlice';
 
 const ExpensesList = (props) => {
   const { data = [] } = useGetUserExpensesQuery();
-  // const [getUserExpenses] = useGetUserExpensesQuery();
+
   if (data.length === 0) {
     // if (props.items.length === 0) {
     return <h2 className="text-warning">No Expenes Found</h2>;
