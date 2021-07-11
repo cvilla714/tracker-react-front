@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-// import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
 import Card from '../Ui/Card';
 import ExpensesFiter from './ExpensesFiter';
-import ExpensesList from './ExpensesList';
+// import ExpensesList from './ExpensesList';
 // import ExpensesChart from './ExpensesChart';
 import { useGetUserExpensesQuery } from '../../features/user/statusSlice';
+import ExpenseItem from './ExpenseItem';
 
-const Expenses = (props) => {
+const Expenses = () => {
   const { data = [] } = useGetUserExpensesQuery();
 
   const [filterYear, setFilterYear] = useState('2021');
@@ -16,39 +16,44 @@ const Expenses = (props) => {
     setFilterYear(selectedyear);
   };
 
-  // console.log(filterYear);
-  // console.log(data);
+  // const months = data.map((pill) => new Date(pill.date));
 
-  // console.log(data.filter((month) => month.title === 'wallmart'));
+  // console.log(
+  //   months.filter((item) => {
+  //     return item.toLocaleString('en-US', { year: 'numeric' }) === filterYear;
+  //   }),
+  // );
 
-  // console.log(data.map((pill) => pill.date));
-
-  // console.log(data.map((pill) => new Date(pill.date)));
-
-  const months = data.map((pill) => new Date(pill.date));
+  console.log(data);
 
   console.log(
-    months.filter((item) => {
-      return item.toLocaleString('en-US', { year: 'numeric' }) === filterYear;
+    data.filter((item) => {
+      return (
+        new Date(item.date).toLocaleString('en-US', { year: 'numeric' }) ===
+        filterYear
+      );
     }),
   );
 
-  const filteredExpenses = months.filter((month) => {
-    return month.toLocaleString('en-US', { year: 'numeric' }) === filterYear;
+  const filteredExpenses = data.filter((month) => {
+    return (
+      new Date(month.date).toLocaleString('en-US', { year: 'numeric' }) ===
+      filterYear
+    );
   });
 
-  // const dyear = data.filter((month) => {
-  //   return (
-  //     month.date.toLocaleString('en-US', { year: 'numeric' }) === filterYear
-  //   );
-  // });
+  let expensesContent = <h2 className="text-warning">No Expenes Found</h2>;
 
-  // console.log(props.items);
-  // const filteredExpenses = props.items.filter((expense) => {
-  //   return (
-  //     expense.date.toLocaleString('en-US', { year: 'numeric' }) === filterYear
-  //   );
-  // });
+  if (filteredExpenses.length > 0) {
+    expensesContent = filteredExpenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+      />
+    ));
+  }
 
   return (
     <div>
@@ -58,8 +63,8 @@ const Expenses = (props) => {
           onChangeFitler={filterChangeHandler}
         />
         {/* <ExpensesChart expenses={filteredExpenses} /> */}
-        <ExpensesList items={filteredExpenses} />
-        {/* <ExpensesList /> */}
+        {/* <ExpensesList data={filteredExpenses} /> */}
+        {expensesContent}
       </Card>
     </div>
   );
