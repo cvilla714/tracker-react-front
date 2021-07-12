@@ -18,6 +18,16 @@ export const checkLoginStatusapi = createApi({
       },
       invalidatesTags: ['Session'],
     }),
+    registerUser: builder.mutation({
+      query(body) {
+        return {
+          url: 'registrations',
+          method: 'POST',
+          body,
+        };
+      },
+      invalidatesTags: ['Session'],
+    }),
     getLoginUserInfo: builder.query({
       query: () => `logged_in/`,
       providesTags: ['Session'],
@@ -55,6 +65,7 @@ export const {
   useGetLoginUserInfoQuery,
   useLogoutUserMutation,
   useUserSessionMutation,
+  useRegisterUserMutation,
   useGetUserExpensesQuery,
   usePostUserExpensesMutation,
 } = checkLoginStatusapi;
