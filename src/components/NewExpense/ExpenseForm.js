@@ -9,7 +9,7 @@ const ExpenseForm = (props) => {
   const [enterDate, setEnterDate] = useState('');
 
   const [postUserExpenses] = usePostUserExpensesMutation();
-  const { data } = useGetLoginUserInfoQuery();
+  const { data: userid } = useGetLoginUserInfoQuery();
 
   const titleChangeHandler = (e) => {
     setEnterTitle(e.target.value);
@@ -32,7 +32,8 @@ const ExpenseForm = (props) => {
       title: enterTitle,
       amount: +enterAmount,
       date: new Date(enterDate).toLocaleDateString(),
-      user_id: data.user.id,
+      // user_id: data.user.id,
+      user_id: userid.user.id,
       // date: new Date(enterDate),
     };
 
