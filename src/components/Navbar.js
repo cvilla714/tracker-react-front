@@ -10,6 +10,8 @@ import {
 const NavigationBar = (props) => {
   const { data, error, isLoading } = useGetLoginUserInfoQuery();
   const [logoutUser] = useLogoutUserMutation();
+  // console.log(data);
+
   return (
     <div>
       <Navbar bg="primary" variant="dark">
