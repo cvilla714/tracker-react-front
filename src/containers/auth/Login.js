@@ -41,20 +41,6 @@ const Login = (props) => {
     setEnterPassword('');
     setEnterUser('');
   };
-  // const handlChange = (event) => {
-  //   dispatch(
-  //     setUserProperty({
-  //       name: event.target.name,
-  //       value: event.target.value,
-  //     }),
-  //   );
-  // };
-
-  // const handleSubmit = (event) => {
-  //   dispatch(loginUser());
-  //   event.preventDefault();
-  //   // props.history.push('/');
-  // };
 
   return (
     <div className="container">
