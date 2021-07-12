@@ -24,16 +24,16 @@ const Expenses = () => {
   //   }),
   // );
 
-  console.log(data);
+  // console.log(data);
 
-  console.log(
-    data.filter((item) => {
-      return (
-        new Date(item.date).toLocaleString('en-US', { year: 'numeric' }) ===
-        filterYear
-      );
-    }),
-  );
+  // console.log(
+  //   data.filter((item) => {
+  //     return (
+  //       new Date(item.date).toLocaleString('en-US', { year: 'numeric' }) ===
+  //       filterYear
+  //     );
+  //   }),
+  // );
 
   const filteredExpenses = data.filter((month) => {
     return (
