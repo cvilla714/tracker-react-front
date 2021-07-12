@@ -6,11 +6,23 @@ export const checkLoginStatusapi = createApi({
     baseUrl: 'http://localhost:3001',
     credentials: 'include',
   }),
-
+  tagTypes: ['Session'],
   endpoints: (builder) => ({
+    userSession: builder.mutation({
+      query(body) {
+        return {
+          url: 'sessions',
+          method: 'POST',
+          body,
+        };
+      },
+      invalidatesTags: ['Session'],
+    }),
     getLoginUserInfo: builder.query({
       query: () => `logged_in/`,
+      providesTags: ['Session'],
     }),
+
     logoutUser: builder.mutation({
       query() {
         return {
@@ -42,6 +54,7 @@ export const checkLoginStatusapi = createApi({
 export const {
   useGetLoginUserInfoQuery,
   useLogoutUserMutation,
+  useUserSessionMutation,
   useGetUserExpensesQuery,
   usePostUserExpensesMutation,
 } = checkLoginStatusapi;
