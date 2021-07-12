@@ -6,7 +6,7 @@ export const checkLoginStatusapi = createApi({
     baseUrl: 'http://localhost:3001',
     credentials: 'include',
   }),
-  tagTypes: ['Session'],
+  tagTypes: ['Session', 'Expenses'],
   endpoints: (builder) => ({
     userSession: builder.mutation({
       query(body) {
@@ -42,12 +42,8 @@ export const checkLoginStatusapi = createApi({
       },
     }),
     getUserExpenses: builder.query({
-      query() {
-        return {
-          url: 'expenses',
-          method: 'GET',
-        };
-      },
+      query: () => 'expenses',
+      providesTags: ['Expenses'],
     }),
     postUserExpenses: builder.mutation({
       query(body) {
@@ -57,6 +53,7 @@ export const checkLoginStatusapi = createApi({
           body,
         };
       },
+      invalidatesTags: ['Expenses'],
     }),
   }),
 });
