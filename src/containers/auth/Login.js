@@ -21,12 +21,12 @@ const Login = (props) => {
 
   const userHandler = (e) => {
     setEnterUser(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const passwordHandler = (e) => {
     setEnterPassword(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const handleSubmit = (event) => {
