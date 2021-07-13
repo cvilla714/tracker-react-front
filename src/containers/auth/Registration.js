@@ -1,30 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-// import { useDispatch, useSelector } from 'react-redux';
-// import {
-//   createUser,
-//   selectIsRegistrationLoading,
-//   setUserProperty,
-// } from '../../features/user/registrationSlice';
+import { useHistory } from 'react-router';
 import { useRegisterUserMutation } from '../../features/user/statusSlice';
 
 const Registration = (props) => {
-  // const dispatch = useDispatch();
-  // const isRegistering = useSelector(selectIsRegistrationLoading);
-
-  // const user = useSelector((state) => state);
-
-  // const { email, password, password_confirmation } = user;
-
-  // const handleChange = (event) => {
-  //   dispatch(
-  //     setUserProperty({
-  //       name: event.target.name,
-  //       value: event.target.value,
-  //     }),
-  //   );
-  // };
-
+  const history = useHistory();
   const [registerUser] = useRegisterUserMutation();
 
   const [userEmail, setUserEmail] = useState('');
@@ -47,7 +27,6 @@ const Registration = (props) => {
   };
 
   const handleSubmit = (event) => {
-    // dispatch(createUser());
     event.preventDefault();
     const useDataRegistration = {
       user: {
@@ -57,6 +36,7 @@ const Registration = (props) => {
       },
     };
     registerUser(useDataRegistration);
+    history.push('/');
     setUserEmail('');
     setUserPassword('');
     setUserPasswordCofirmation('');
@@ -71,7 +51,6 @@ const Registration = (props) => {
             type="email"
             name="email"
             placeholder="Email"
-            // value={email}
             value={userEmail}
             onChange={emailHandleChange}
             required
@@ -87,7 +66,6 @@ const Registration = (props) => {
             type="password"
             name="password"
             placeholder="Password"
-            // value={password}
             value={userPassword}
             onChange={passwordHandleChange}
             required
@@ -99,17 +77,12 @@ const Registration = (props) => {
             type="password"
             name="password_confirmation"
             placeholder="Confirm Password"
-            // value={password_confirmation}
             value={userPasswordConfirmation}
             onChange={passwordConfirmationHandleChange}
             required
           />
         </Form.Group>
-        <Button type="submit">
-          {/* <Button type="submit" disabled={isRegistering}> */}
-          {/* {isRegistering ? 'Registering...' : 'Register'} */}
-          Register
-        </Button>
+        <Button type="submit">Register</Button>
       </Form>
     </div>
   );
