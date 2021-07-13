@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-// import { useDispatch, useSelector } from 'react-redux';
-// import {
-//   loginUser,
-//   setUserProperty,
-//   selectIsLoginLoading,
-// } from '../../features/user/loginSlice';
+
 import { useUserSessionMutation } from '../../features/user/statusSlice';
 
 const Login = (props) => {
-  // const dispatch = useDispatch();
-  // const isLoginLoading = useSelector(selectIsLoginLoading);
-  // const user = useSelector((state) => state);
-  // const { email, password } = user;
-  // console.log(user);
   const [userSession] = useUserSessionMutation();
 
   const [enterEmail, setEnterUser] = useState('');
@@ -21,12 +11,10 @@ const Login = (props) => {
 
   const userHandler = (e) => {
     setEnterUser(e.target.value);
-    // console.log(e.target.value);
   };
 
   const passwordHandler = (e) => {
     setEnterPassword(e.target.value);
-    // console.log(e.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -38,6 +26,7 @@ const Login = (props) => {
       },
     };
     userSession(userData);
+    props.history.push('/');
     setEnterPassword('');
     setEnterUser('');
   };
@@ -51,7 +40,6 @@ const Login = (props) => {
             type="email"
             name="email"
             placeholder="Enter email"
-            // value={email}
             value={enterEmail}
             onChange={userHandler}
             required
@@ -66,17 +54,12 @@ const Login = (props) => {
             type="password"
             name="password"
             placeholder="Password"
-            // value={password}
             value={enterPassword}
             onChange={passwordHandler}
             required
           />
         </Form.Group>
-        {/* <Button type="submit" disabled={isLoginLoading}> */}
-        <Button type="submit">
-          {/* {isLoginLoading ? 'Loggin you in...' : 'Log in'}{' '} */}
-          Login
-        </Button>{' '}
+        <Button type="submit">Login</Button>{' '}
       </Form>
     </div>
   );
