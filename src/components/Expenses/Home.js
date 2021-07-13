@@ -16,7 +16,7 @@ const Home = () => {
       return [expense, ...prevExpenses];
     });
     // setExpenses([expense, ...expenses]);
-    console.log(expense);
+    // console.log(expense);
   };
   return (
     <div>
