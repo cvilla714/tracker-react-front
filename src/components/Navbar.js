@@ -12,10 +12,12 @@ const NavigationBar = () => {
   const [logoutUser] = useLogoutUserMutation();
 
   const loggedIn = data?.logged_in ? true : false;
+  const isLoggedIn = data?.logged_in ? '/' : '/login';
+  console.log(isLoggedIn);
 
   const authLinks = (
     <Nav className="mr-auto">
-      <Link to="/" className="text-light">
+      <Link to={isLoggedIn} className="text-light">
         Home
       </Link>
       <li>
@@ -29,7 +31,7 @@ const NavigationBar = () => {
 
   const guessLinks = (
     <Nav className="mr-auto">
-      <Link to="/" className="text-light">
+      <Link to={isLoggedIn} className="text-light">
         Home
       </Link>
       <Link to="/register" className="text-white mx-2">
