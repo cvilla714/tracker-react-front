@@ -6,7 +6,6 @@ import Home from './Expenses/Home';
 import Dashboard from './Dashboard';
 import Registration from '../containers/auth/Registration';
 import Login from '../containers/auth/Login';
-import PrivateRoute from './Expenses/PrivateRoute';
 import { useGetLoginUserInfoQuery } from '../features/user/statusSlice';
 
 const App = () => {
@@ -18,18 +17,11 @@ const App = () => {
       <Router>
         <NavigationBar />
         <Switch>
-          {/* <PrivateRoute exact path={'/'} component={Home} isAuth={isAuth} /> */}
           {isAuth ? (
-            <Route exact path={'/'} render={(props) => <Home {...props} />} />
+            <Route exact path={'/'} component={Home} />
           ) : (
             <Route exact path={'/login'} component={Login} />
           )}
-          {/* <Route exact path={'/'} render={(props) => <Home {...props} />} /> */}
-          {/* <PrivateRoute
-            exact
-            path={'/'}
-            render={(props) => <Home {...props} isAuth={isAuth} />}
-          /> */}
           <Route
             exact
             path={'/dashboard'}
