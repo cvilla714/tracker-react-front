@@ -12,38 +12,23 @@ import ExpenseItem from './ExpenseItem';
 const Expenses = () => {
   const { data = [] } = useGetUserExpensesQuery();
 
-  const { data: userdata, error, isLoading } = useGetLoginUserInfoQuery();
+  const { data: userdata } = useGetLoginUserInfoQuery();
   const [filterYear, setFilterYear] = useState('2021');
 
   const filterChangeHandler = (selectedyear) => {
     setFilterYear(selectedyear);
   };
 
-  console.log(data);
-  if (userdata === null || userdata === undefined) {
-    console.log('user is null');
-  } else {
-    console.log(userdata);
-  }
+  // console.log(data);
+  // if (userdata === null || userdata === undefined) {
+  //   console.log('user is null');
+  // } else {
+  //   console.log(userdata);
+  // }
 
   const filterByUserid = userdata?.logged_in
     ? data.filter((item) => item.user_id === userdata.user.id)
     : [];
-
-  // console.log(
-  //   data.filter((item) => {
-  //     return item.user_id === userdata.user.id;
-  //   }),
-  // );
-
-  // console.log(
-  //   filterByUserid.filter((monthly) => {
-  //     return (
-  //       new Date(monthly.date).toLocaleString('en-US', { year: 'numeric' }) ===
-  //       filterYear
-  //     );
-  //   }),
-  // );
 
   const filterExpensesByUserId = filterByUserid.filter((month) => {
     return (
@@ -61,8 +46,10 @@ const Expenses = () => {
         title={expense.title}
         amount={expense.amount}
         date={expense.date}
+        id={expense.id}
       />
     ));
+    // console.log(expensesContent);
   }
 
   return (
@@ -72,8 +59,8 @@ const Expenses = () => {
           selected={filterYear}
           onChangeFitler={filterChangeHandler}
         />
-
-        {error ? (
+        {expensesContent}
+        {/* {error ? (
           <>Oh no, there is no data because no user is logged in</>
         ) : isLoading ? (
           <>Loading...</>
@@ -81,7 +68,7 @@ const Expenses = () => {
           <>{expensesContent}</>
         ) : (
           <h2 className="text-warning">Please log in</h2>
-        )}
+        )} */}
       </Card>
     </div>
   );
