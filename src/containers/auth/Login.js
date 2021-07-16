@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 import { useUserSessionMutation } from '../../features/user/statusSlice';
 
 const Login = (props) => {
+  const history = useHistory();
   const [userSession] = useUserSessionMutation();
 
   const [enterEmail, setEnterUser] = useState('');
@@ -26,7 +28,7 @@ const Login = (props) => {
       },
     };
     userSession(userData);
-    props.history.push('/');
+    history.push('/');
     setEnterPassword('');
     setEnterUser('');
   };
