@@ -1,36 +1,43 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-
+import useForm from '../../components/Hooks/useForm';
 import { useUserSessionMutation } from '../../features/user/statusSlice';
 
 const Login = (props) => {
+  const { form, handleChange, clearForm } = useForm({
+    email: '',
+    password: '',
+  });
   const history = useHistory();
   const [userSession] = useUserSessionMutation();
 
-  const [enterEmail, setEnterUser] = useState('');
-  const [enterPassword, setEnterPassword] = useState('');
+  // const [enterEmail, setEnterUser] = useState('');
+  // const [enterPassword, setEnterPassword] = useState('');
 
-  const userHandler = (e) => {
-    setEnterUser(e.target.value);
-  };
+  // const userHandler = (e) => {
+  //   setEnterUser(e.target.value);
+  // };
 
-  const passwordHandler = (e) => {
-    setEnterPassword(e.target.value);
-  };
+  // const passwordHandler = (e) => {
+  //   setEnterPassword(e.target.value);
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const userData = {
       user: {
-        email: enterEmail,
-        password: enterPassword,
+        // email: enterEmail,
+        // password: enterPassword,
+        email: form.email,
+        password: form.password,
       },
     };
     userSession(userData);
     history.push('/');
-    setEnterPassword('');
-    setEnterUser('');
+    clearForm();
+    // setEnterPassword('');
+    // setEnterUser('');
   };
 
   return (
@@ -42,8 +49,10 @@ const Login = (props) => {
             type="email"
             name="email"
             placeholder="Enter email"
-            value={enterEmail}
-            onChange={userHandler}
+            value={form.email}
+            onChange={handleChange}
+            // value={enterEmail}
+            // onChange={userHandler}
             required
           />
           <Form.Text className="text-muted">
@@ -56,8 +65,10 @@ const Login = (props) => {
             type="password"
             name="password"
             placeholder="Password"
-            value={enterPassword}
-            onChange={passwordHandler}
+            value={form.password}
+            onChange={handleChange}
+            // value={enterPassword}
+            // onChange={passwordHandler}
             required
           />
         </Form.Group>
