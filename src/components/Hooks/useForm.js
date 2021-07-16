@@ -4,6 +4,9 @@ const InitialState = {
   title: '',
   amount: '',
   date: '',
+  email: '',
+  password: '',
+  password_confirmation: '',
 };
 const useForm = (InitialState) => {
   const [form, setForm] = useState(InitialState);
