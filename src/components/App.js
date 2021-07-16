@@ -11,7 +11,7 @@ import { useGetLoginUserInfoQuery } from '../features/user/statusSlice';
 const App = () => {
   const { data } = useGetLoginUserInfoQuery();
   const isAuth = data?.logged_in ? true : false;
-  console.log(isAuth);
+  // console.log(isAuth);
   return (
     <div className="App">
       <Router>
