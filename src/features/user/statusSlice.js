@@ -55,6 +55,17 @@ export const checkLoginStatusapi = createApi({
       },
       invalidatesTags: ['Expenses'],
     }),
+    updateExpenses: builder.mutation({
+      query(data) {
+        const { id, ...body } = data;
+        return {
+          url: `expenses/${id}.json`,
+          method: 'PUT',
+          body,
+        };
+      },
+      invalidatesTags: ['Expenses'],
+    }),
   }),
 });
 
@@ -65,4 +76,5 @@ export const {
   useRegisterUserMutation,
   useGetUserExpensesQuery,
   usePostUserExpensesMutation,
+  useUpdateExpensesMutation,
 } = checkLoginStatusapi;
