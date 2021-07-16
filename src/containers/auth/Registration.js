@@ -2,44 +2,57 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { useRegisterUserMutation } from '../../features/user/statusSlice';
+import useForm from '../../components/Hooks/useForm';
+// import useRedirect from '../../components/Hooks/useRedirect';
 
 const Registration = (props) => {
+  // const {redirect} = useRedirect()
+  const { form, handleChange, clearForm } = useForm({
+    email: '',
+    password: '',
+    password_confirmation: '',
+  });
+
   const history = useHistory();
   const [registerUser] = useRegisterUserMutation();
 
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [userPasswordConfirmation, setUserPasswordCofirmation] = useState('');
+  // const [userEmail, setUserEmail] = useState('');
+  // const [userPassword, setUserPassword] = useState('');
+  // const [userPasswordConfirmation, setUserPasswordCofirmation] = useState('');
 
-  const emailHandleChange = (e) => {
-    setUserEmail(e.target.value);
-    console.log(e.target.value);
-  };
+  // const emailHandleChange = (e) => {
+  //   setUserEmail(e.target.value);
+  //   console.log(e.target.value);
+  // };
 
-  const passwordHandleChange = (e) => {
-    setUserPassword(e.target.value);
-    console.log(e.target.value);
-  };
+  // const passwordHandleChange = (e) => {
+  //   setUserPassword(e.target.value);
+  //   console.log(e.target.value);
+  // };
 
-  const passwordConfirmationHandleChange = (e) => {
-    setUserPasswordCofirmation(e.target.value);
-    console.log(e.target.value);
-  };
+  // const passwordConfirmationHandleChange = (e) => {
+  //   setUserPasswordCofirmation(e.target.value);
+  //   console.log(e.target.value);
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const useDataRegistration = {
       user: {
-        email: userEmail,
-        password: userPassword,
-        password_confirmation: userPasswordConfirmation,
+        // email: userEmail,
+        // password: userPassword,
+        // password_confirmation: userPasswordConfirmation,
+        email: form.email,
+        password: form.password,
+        password_confirmation: form.password_confirmation,
       },
     };
     registerUser(useDataRegistration);
     history.push('/');
-    setUserEmail('');
-    setUserPassword('');
-    setUserPasswordCofirmation('');
+    clearForm();
+    // setUserEmail('');
+    // setUserPassword('');
+    // setUserPasswordCofirmation('');
   };
 
   return (
@@ -51,8 +64,10 @@ const Registration = (props) => {
             type="email"
             name="email"
             placeholder="Email"
-            value={userEmail}
-            onChange={emailHandleChange}
+            value={form.email}
+            onChange={handleChange}
+            // value={userEmail}
+            // onChange={emailHandleChange}
             required
           />
           <Form.Text className="text-muted">
@@ -66,8 +81,10 @@ const Registration = (props) => {
             type="password"
             name="password"
             placeholder="Password"
-            value={userPassword}
-            onChange={passwordHandleChange}
+            value={form.password}
+            onChange={handleChange}
+            // value={userPassword}
+            // onChange={passwordHandleChange}
             required
           />
         </Form.Group>
@@ -77,8 +94,10 @@ const Registration = (props) => {
             type="password"
             name="password_confirmation"
             placeholder="Confirm Password"
-            value={userPasswordConfirmation}
-            onChange={passwordConfirmationHandleChange}
+            value={form.password_confirmation}
+            onChange={handleChange}
+            // value={userPasswordConfirmation}
+            // onChange={passwordConfirmationHandleChange}
             required
           />
         </Form.Group>
