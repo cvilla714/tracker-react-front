@@ -4,6 +4,7 @@ const InitialState = {
   title: '',
   amount: '',
   date: '',
+  name: '',
   email: '',
   password: '',
   password_confirmation: '',
