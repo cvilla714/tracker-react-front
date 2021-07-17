@@ -7,7 +7,6 @@ import useForm from '../Hooks/useForm';
 import {
   useUpdateExpensesMutation,
   useGetUserExpensesQuery,
-  useGetLoginUserInfoQuery,
 } from '../../features/user/statusSlice';
 
 const ExpenseItem = ({ date, title, amount, id }) => {
@@ -18,7 +17,6 @@ const ExpenseItem = ({ date, title, amount, id }) => {
   });
   const [updateExpenses] = useUpdateExpensesMutation();
   const { data } = useGetUserExpensesQuery();
-  const { data: userid } = useGetLoginUserInfoQuery();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -51,7 +49,6 @@ const ExpenseItem = ({ date, title, amount, id }) => {
           <Modal.Title>Update Expense Information</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* <Form action="" onSubmit={handleSubmit}> */}
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Title</Form.Label>
@@ -61,6 +58,7 @@ const ExpenseItem = ({ date, title, amount, id }) => {
                 value={form.title}
                 onChange={handleChange}
                 placeholder="Enter Expense"
+                required
               />
             </Form.Group>
 
@@ -74,6 +72,7 @@ const ExpenseItem = ({ date, title, amount, id }) => {
                 value={form.amount}
                 onChange={handleChange}
                 placeholder="Enter Amount"
+                required
               />
             </Form.Group>
             <Form.Group
@@ -89,14 +88,9 @@ const ExpenseItem = ({ date, title, amount, id }) => {
                 value={form.date}
                 onChange={handleChange}
                 placeholder="Select Date"
+                required
               />
             </Form.Group>
-            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button> */}
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -104,7 +98,6 @@ const ExpenseItem = ({ date, title, amount, id }) => {
             Close
           </Button>
           <Button variant="primary" type="submit" onClick={handleSubmit}>
-            {/* <Button variant="primary" type="submit"> */}
             Save Changes
           </Button>
         </Modal.Footer>
