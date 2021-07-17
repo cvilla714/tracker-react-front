@@ -8,7 +8,7 @@ const InitialState = {
   password: '',
   password_confirmation: '',
 };
-const useForm = (InitialState) => {
+const useForm = () => {
   const [form, setForm] = useState(InitialState);
 
   const handleChange = ({ target }) => {
@@ -20,7 +20,7 @@ const useForm = (InitialState) => {
   const clearForm = () => {
     setForm(InitialState);
   };
-  console.log(form);
+  // console.log(form);
   return { form, handleChange, clearForm };
 };
 
