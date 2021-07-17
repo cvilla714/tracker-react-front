@@ -6,6 +6,7 @@ import useForm from '../../components/Hooks/useForm';
 
 const Registration = (props) => {
   const { form, handleChange, clearForm } = useForm({
+    name: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -18,6 +19,7 @@ const Registration = (props) => {
     event.preventDefault();
     const useDataRegistration = {
       user: {
+        name: form.name,
         email: form.email,
         password: form.password,
         password_confirmation: form.password_confirmation,
@@ -31,6 +33,17 @@ const Registration = (props) => {
   return (
     <div className="container">
       <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -41,9 +54,6 @@ const Registration = (props) => {
             onChange={handleChange}
             required
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
@@ -57,7 +67,7 @@ const Registration = (props) => {
             required
           />
         </Form.Group>
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group controlId="formBasicPasswordConfirmation">
           <Form.Label>Password Confirmation</Form.Label>
           <Form.Control
             type="password"
