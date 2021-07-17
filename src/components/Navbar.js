@@ -58,7 +58,7 @@ const NavigationBar = () => {
             <>Loading...</>
           ) : data.logged_in ? (
             <>
-              <Navbar.Text>Hello: {data.user.email}</Navbar.Text>
+              <Navbar.Text>Hello: {data.user.name}</Navbar.Text>
             </>
           ) : (
             <Navbar.Text>Hello: Guess </Navbar.Text>
