@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import useForm from '../../components/Hooks/useForm';
@@ -12,23 +12,10 @@ const Login = (props) => {
   const history = useHistory();
   const [userSession] = useUserSessionMutation();
 
-  // const [enterEmail, setEnterUser] = useState('');
-  // const [enterPassword, setEnterPassword] = useState('');
-
-  // const userHandler = (e) => {
-  //   setEnterUser(e.target.value);
-  // };
-
-  // const passwordHandler = (e) => {
-  //   setEnterPassword(e.target.value);
-  // };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const userData = {
       user: {
-        // email: enterEmail,
-        // password: enterPassword,
         email: form.email,
         password: form.password,
       },
@@ -36,8 +23,6 @@ const Login = (props) => {
     userSession(userData);
     history.push('/');
     clearForm();
-    // setEnterPassword('');
-    // setEnterUser('');
   };
 
   return (
@@ -51,8 +36,6 @@ const Login = (props) => {
             placeholder="Enter email"
             value={form.email}
             onChange={handleChange}
-            // value={enterEmail}
-            // onChange={userHandler}
             required
           />
           <Form.Text className="text-muted">
@@ -67,8 +50,6 @@ const Login = (props) => {
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
-            // value={enterPassword}
-            // onChange={passwordHandler}
             required
           />
         </Form.Group>
