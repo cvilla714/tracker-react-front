@@ -3,6 +3,7 @@ import ExpenseDate from './ExpenseDate';
 import './Expenseitem.css';
 import Card from '../Ui/Card';
 import { Button, Modal, Form } from 'react-bootstrap';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import useForm from '../Hooks/useForm';
 import {
   useUpdateExpensesMutation,
@@ -122,10 +123,10 @@ const ExpenseItem = ({ date, title, amount, id }) => {
             <h2>{title}</h2>
             <div className="expense-item__price">{amount}</div>
             <Button id={id} variant="primary" onClick={handleShow}>
-              Update the Expense
+              <FaEdit />
             </Button>
             <Button id={id} variant="primary" onClick={handleDelete}>
-              Delete the Expense
+              <FaTrashAlt />
             </Button>
           </div>
         </Card>
