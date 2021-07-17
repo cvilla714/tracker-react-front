@@ -7,6 +7,7 @@ import useForm from '../Hooks/useForm';
 import {
   useUpdateExpensesMutation,
   useGetUserExpensesQuery,
+  useDeleteExpenseMutation,
 } from '../../features/user/statusSlice';
 
 const ExpenseItem = ({ date, title, amount, id }) => {
@@ -17,6 +18,8 @@ const ExpenseItem = ({ date, title, amount, id }) => {
   });
   const [updateExpenses] = useUpdateExpensesMutation();
   const { data } = useGetUserExpensesQuery();
+
+  const [deleteExpense] = useDeleteExpenseMutation();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -40,6 +43,16 @@ const ExpenseItem = ({ date, title, amount, id }) => {
     const updatingTheExpense = handleShow(e);
     updateExpenses(updatingTheExpense);
     clearForm();
+  };
+
+  const handleDelete = (e) => {
+    const deleteItem = data.find((item) => item.id === +e.target.id);
+    console.log(deleteItem);
+    // console.log(deleteItem.id);
+    const deleteItemId = deleteItem.id;
+    console.log(deleteItemId);
+    // const deleteItem = handleShow(e);
+    deleteExpense(deleteItemId);
   };
 
   return (
@@ -110,6 +123,9 @@ const ExpenseItem = ({ date, title, amount, id }) => {
             <div className="expense-item__price">{amount}</div>
             <Button id={id} variant="primary" onClick={handleShow}>
               Update the Expense
+            </Button>
+            <Button id={id} variant="primary" onClick={handleDelete}>
+              Delete the Expense
             </Button>
           </div>
         </Card>
