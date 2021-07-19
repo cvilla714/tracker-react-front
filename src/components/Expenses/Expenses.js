@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Expenses.css';
 import Card from '../Ui/Card';
 import ExpensesFiter from './ExpensesFiter';
+import BarChart from '../Chart/BarChart';
 
 import {
   useGetUserExpensesQuery,
@@ -59,6 +60,7 @@ const Expenses = () => {
           selected={filterYear}
           onChangeFitler={filterChangeHandler}
         />
+        <BarChart filterYear={filterYear} />
         {expensesContent}
         {/* {error ? (
           <>Oh no, there is no data because no user is logged in</>
