@@ -23,6 +23,25 @@ const BarChart = (props) => {
     );
   });
 
+  console.log(filterItByUserId);
+
+  const filterItByMonth = filterIt
+    .filter((vaso) => {
+      return (
+        new Date(vaso.date).toLocaleString('en-US', { year: 'numeric' }) ===
+        props.filterYear
+      );
+    })
+    .map((spoon) =>
+      new Date(spoon.date).toLocaleString('en-US', { month: 'long' }),
+    );
+
+  console.log(filterItByMonth);
+  // const meses = filterIt.map((masa) => {
+  //   return new Date(masa.date).toLocaleString('en-US', { month: 'long' });
+  // });
+  // console.log(meses);
+
   // console.log(
   //   data
   //     ? data.map((month) =>
@@ -61,7 +80,7 @@ const BarChart = (props) => {
     <div>
       <Bar
         data={{
-          labels: months,
+          labels: filterItByMonth,
           datasets: [
             {
               label: 'Total Expenses Per Month',
