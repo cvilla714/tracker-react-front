@@ -20,13 +20,6 @@ const Expenses = () => {
     setFilterYear(selectedyear);
   };
 
-  // console.log(data);
-  // if (userdata === null || userdata === undefined) {
-  //   console.log('user is null');
-  // } else {
-  //   console.log(userdata);
-  // }
-
   const filterByUserid = userdata?.logged_in
     ? data.filter((item) => item.user_id === userdata.user.id)
     : [];
@@ -50,7 +43,6 @@ const Expenses = () => {
         id={expense.id}
       />
     ));
-    // console.log(expensesContent);
   }
 
   return (
@@ -62,15 +54,6 @@ const Expenses = () => {
         />
         <BarChart filterYear={filterYear} />
         {expensesContent}
-        {/* {error ? (
-          <>Oh no, there is no data because no user is logged in</>
-        ) : isLoading ? (
-          <>Loading...</>
-        ) : userdata.logged_in ? (
-          <>{expensesContent}</>
-        ) : (
-          <h2 className="text-warning">Please log in</h2>
-        )} */}
       </Card>
     </div>
   );
