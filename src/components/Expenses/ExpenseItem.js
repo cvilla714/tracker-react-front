@@ -48,11 +48,7 @@ const ExpenseItem = ({ date, title, amount, id }) => {
 
   const handleDelete = (e) => {
     const deleteItem = data.find((item) => item.id === +e.target.id);
-    console.log(deleteItem);
-    // console.log(deleteItem.id);
     const deleteItemId = deleteItem.id;
-    console.log(deleteItemId);
-    // const deleteItem = handleShow(e);
     deleteExpense(deleteItemId);
   };
 
