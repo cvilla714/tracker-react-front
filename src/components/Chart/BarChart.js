@@ -75,7 +75,15 @@ const BarChart = (props) => {
             {
               label: 'Total Expenses Per Month',
               data: valuesMonths,
-              backgroundColor: 'yellow',
+              backgroundColor: [
+                'yellow',
+                'blue',
+                'green',
+                'brown',
+                'orange',
+                'red',
+              ],
+              maxBarThickness: 150,
             },
           ],
         }}
