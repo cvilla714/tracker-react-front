@@ -25,18 +25,64 @@ const BarChart = (props) => {
 
   console.log(filterItByUserId);
 
-  const filterItByMonth = filterIt
-    .filter((vaso) => {
-      return (
-        new Date(vaso.date).toLocaleString('en-US', { year: 'numeric' }) ===
-        props.filterYear
-      );
-    })
-    .map((spoon) =>
-      new Date(spoon.date).toLocaleString('en-US', { month: 'long' }),
-    );
+  // const filterItByMonth = filterIt
+  //   .filter((vaso) => {
+  //     return (
+  //       new Date(vaso.date).toLocaleString('en-US', { year: 'numeric' }) ===
+  //       props.filterYear
+  //     );
+  //   })
+  //   .map((spoon) =>
+  //     new Date(spoon.date).toLocaleString('en-US', { month: 'long' }),
+  //   );
 
-  console.log(filterItByMonth);
+  // console.log(filterItByMonth);
+
+  // const filterItByMonth = filterIt.filter((vaso) => {
+  //   return (
+  //     new Date(vaso.date).toLocaleString('en-US', { year: 'numeric' }) ===
+  //     props.filterYear
+  //   );
+  // });
+
+  // console.log(filterItByMonth);
+  const expensesPerMoth = () => {
+    console.log(filterItByUserId);
+    let expenses = {};
+
+    filterItByUserId.map((item) => {
+      const formatMonth = new Date(item.date).toLocaleString('en-US', {
+        month: 'long',
+      });
+      // console.log(formatMonth);
+      expenses[formatMonth]
+        ? (expenses[formatMonth] += item.amount)
+        : (expenses[formatMonth] = item.amount);
+    });
+    return expenses;
+  };
+
+  console.log(expensesPerMoth());
+
+  const renderValues = () => {
+    const barMonths = Object.keys(expensesPerMoth());
+    const valuesMonths = Object.values(expensesPerMoth());
+    return (
+      <Bar
+        data={{
+          labels: barMonths,
+          datasets: [
+            {
+              label: 'Total Expenses Per Month',
+              data: valuesMonths,
+              backgroundColor: 'yellow',
+            },
+          ],
+        }}
+      />
+    );
+  };
+
   // const meses = filterIt.map((masa) => {
   //   return new Date(masa.date).toLocaleString('en-US', { month: 'long' });
   // });
@@ -65,8 +111,8 @@ const BarChart = (props) => {
   // const totalExpenses = data ? data.map((expense) => expense.amount) : [];
   // console.log(totalExpenses);
 
-  const totalFilterExpenses = filterItByUserId.map((gastos) => gastos.amount);
-  console.log(totalFilterExpenses);
+  // const totalFilterExpenses = filterItByUserId.map((gastos) => gastos.amount);
+  // console.log(totalFilterExpenses);
 
   // const result = data
   //   ? data.reduce((acc, total) => {
@@ -78,18 +124,19 @@ const BarChart = (props) => {
 
   return (
     <div>
-      <Bar
+      {/* <Bar
         data={{
-          labels: filterItByMonth,
+          // labels: filterItByMonth,
           datasets: [
             {
               label: 'Total Expenses Per Month',
-              data: totalFilterExpenses,
+              // data: totalFilterExpenses,
               backgroundColor: 'white',
             },
           ],
         }}
-      />
+      /> */}
+      {renderValues()}
     </div>
   );
 };
