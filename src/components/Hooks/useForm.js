@@ -21,7 +21,7 @@ const useForm = () => {
   const clearForm = () => {
     setForm(InitialState);
   };
-  // console.log(form);
+
   return { form, handleChange, clearForm };
 };
 

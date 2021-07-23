@@ -56,8 +56,6 @@ const loginSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        // state.user.email = action.payload.user.email;
-        // state.user.password = action.payload.user.password;
         state.loading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {

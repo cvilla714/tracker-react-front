@@ -3,9 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const createUser = createAsyncThunk(
   'registration/createUser',
-  // You either pass in the arg to use, or you pull them out of the state.
   async (userFromArg, { getState }) => {
-    // const user = getState().registration.user;
     const {
       registration: {
         user: { email, password, password_confirmation },

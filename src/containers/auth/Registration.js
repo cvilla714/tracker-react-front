@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { useRegisterUserMutation } from '../../features/user/statusSlice';
 import useForm from '../../components/Hooks/useForm';
 
-const Registration = (props) => {
+const Registration = () => {
   const { form, handleChange, clearForm } = useForm({
     name: '',
     email: '',
