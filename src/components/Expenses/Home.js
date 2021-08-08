@@ -8,9 +8,7 @@ const Home = () => {
   const [expenses, setExpenses] = useState(data);
 
   const addExpenseHandler = (expense) => {
-    setExpenses((prevExpenses) => {
-      return [expense, ...prevExpenses];
-    });
+    setExpenses((prevExpenses) => [expense, ...prevExpenses]);
   };
   return (
     <div>
