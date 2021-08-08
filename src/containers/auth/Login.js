@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-// import { useHistory } from 'react-router-dom';
 import useRedirect from '../../components/Hooks/useRedirect';
 import useForm from '../../components/Hooks/useForm';
 import { useUserSessionMutation } from '../../features/user/statusSlice';
@@ -10,7 +9,6 @@ const Login = () => {
     email: '',
     password: '',
   });
-  // const history = useHistory();
   const { redirect } = useRedirect();
   const [userSession] = useUserSessionMutation();
 
@@ -23,7 +21,6 @@ const Login = () => {
       },
     };
     userSession(userData);
-    // history.push('/');
     redirect('/');
     clearForm();
   };
@@ -41,9 +38,6 @@ const Login = () => {
             onChange={handleChange}
             required
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
@@ -56,7 +50,8 @@ const Login = () => {
             required
           />
         </Form.Group>
-        <Button type="submit">Login</Button>{' '}
+        <Button type="submit">Login</Button>
+        {' '}
       </Form>
     </div>
   );
