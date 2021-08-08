@@ -1,12 +1,14 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import PropTypes from 'prop-types';
 import {
   useGetUserExpensesQuery,
   useGetLoginUserInfoQuery,
 } from '../../features/user/statusSlice';
-import { Bar } from 'react-chartjs-2';
-const BarChart = (props) => {
+
+const BarChart = ({ filterYear }) => {
   const { data = [] } = useGetUserExpensesQuery();
-  console.log(data);
 
   const { data: userdata } = useGetLoginUserInfoQuery();
 
@@ -14,19 +16,13 @@ const BarChart = (props) => {
     ? data.filter((item) => item.user_id === userdata.user.id)
     : [];
 
-  console.log(filterIt);
-
-  const filterItByUserId = filterIt.filter((vaso) => {
-    return (
-      new Date(vaso.date).toLocaleString('en-US', { year: 'numeric' }) ===
-      props.filterYear
-    );
-  });
-
-  console.log(filterItByUserId);
+  const filterItByUserId = filterIt.filter(
+    (vaso) => new Date(vaso.date).toLocaleString('en-US', { year: 'numeric' })
+      === filterYear,
+  );
 
   const expensesPerMoth = () => {
-    let expenses = {};
+    const expenses = {};
 
     filterItByUserId.forEach((item) => {
       const formatMonth = new Date(item.date).toLocaleString('en-US', {
@@ -39,8 +35,6 @@ const BarChart = (props) => {
     });
     return expenses;
   };
-
-  console.log(expensesPerMoth());
 
   const renderValues = () => {
     const barMonths = Object.keys(expensesPerMoth());
@@ -70,6 +64,10 @@ const BarChart = (props) => {
   };
 
   return <div>{renderValues()}</div>;
+};
+
+BarChart.propTypes = {
+  filterYear: PropTypes.string.isRequired,
 };
 
 export default BarChart;
