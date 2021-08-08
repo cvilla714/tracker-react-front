@@ -29,14 +29,14 @@ export const checkLoginStatusapi = createApi({
       invalidatesTags: ['Session'],
     }),
     getLoginUserInfo: builder.query({
-      query: () => `logged_in/`,
+      query: () => 'logged_in/',
       providesTags: ['Session'],
     }),
 
     logoutUser: builder.mutation({
       query() {
         return {
-          url: `logout`,
+          url: 'logout',
           method: 'DELETE',
         };
       },
@@ -70,7 +70,7 @@ export const checkLoginStatusapi = createApi({
       query(id) {
         return {
           url: `expenses/${id}.json`,
-          method: `DELETE`,
+          method: 'DELETE',
         };
       },
       invalidatesTags: ['Expenses'],
