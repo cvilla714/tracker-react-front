@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -6,7 +8,7 @@ export const createUser = createAsyncThunk(
   async (userFromArg, { getState }) => {
     const {
       registration: {
-        user: { email, password, password_confirmation },
+        user: { email, password, password_confirmation: paswordConfirmation },
       },
     } = getState();
     return axios
@@ -16,7 +18,7 @@ export const createUser = createAsyncThunk(
           user: {
             email,
             password,
-            password_confirmation,
+            paswordConfirmation,
           },
         },
         { withCredentials: true },
@@ -50,7 +52,7 @@ const registrationSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createUser.pending, (state, action) => {
+      .addCase(createUser.pending, (state) => {
         state.loading = true;
       })
       .addCase(createUser.fulfilled, (state, action) => {
@@ -68,5 +70,4 @@ export const { setUsers, setUserProperty } = registrationSlice.actions;
 
 export default registrationSlice.reducer;
 
-export const selectIsRegistrationLoading = (state) =>
-  state.registration.loading;
+export const selectIsRegistrationLoading = (state) => state.registration.loading;
