@@ -1,9 +1,9 @@
 import { useHistory } from 'react-router';
 
-const useRedirect = (location) => {
+const useRedirect = () => {
   const history = useHistory();
 
-  const redirect = () => {
+  const redirect = (location) => {
     history.push(location);
   };
   return { redirect };
