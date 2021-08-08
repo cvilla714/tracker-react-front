@@ -3,7 +3,7 @@ import ExpenseItem from './ExpenseItem';
 import './ExpensesList.css';
 import { useGetUserExpensesQuery } from '../../features/user/statusSlice';
 
-const ExpensesList = (props) => {
+const ExpensesList = () => {
   const { data = [] } = useGetUserExpensesQuery();
 
   if (data.length === 0) {
