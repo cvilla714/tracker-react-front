@@ -28,7 +28,7 @@ const BarChart = (props) => {
   const expensesPerMoth = () => {
     let expenses = {};
 
-    filterItByUserId.map((item) => {
+    filterItByUserId.forEach((item) => {
       const formatMonth = new Date(item.date).toLocaleString('en-US', {
         month: 'long',
       });
