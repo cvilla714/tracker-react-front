@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -11,7 +12,7 @@ const NavigationBar = () => {
   const { data, error, isLoading } = useGetLoginUserInfoQuery();
   const [logoutUser] = useLogoutUserMutation();
 
-  const loggedIn = data?.logged_in ? true : false;
+  const loggedIn = !!data?.logged_in;
   const isLoggedIn = data?.logged_in ? '/' : '/login';
 
   const authLinks = (
@@ -55,7 +56,10 @@ const NavigationBar = () => {
             <>Loading...</>
           ) : data.logged_in ? (
             <>
-              <Navbar.Text>Hello: {data.user.name}</Navbar.Text>
+              <Navbar.Text>
+                Hello:
+                {data.user.name}
+              </Navbar.Text>
             </>
           ) : (
             <Navbar.Text>Hello: Guess </Navbar.Text>

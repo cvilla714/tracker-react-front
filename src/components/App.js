@@ -10,19 +10,19 @@ import { useGetLoginUserInfoQuery } from '../features/user/statusSlice';
 
 const App = () => {
   const { data } = useGetLoginUserInfoQuery();
-  const isAuth = data?.logged_in ? true : false;
+  const isAuth = !!data?.logged_in;
   return (
     <div className="App">
       <Router>
         <NavigationBar />
         <Switch>
           {isAuth ? (
-            <Route exact path={'/'} component={Home} />
+            <Route exact path="/" component={Home} />
           ) : (
-            <Route exact path={'/login'} component={Login} />
+            <Route exact path="/login" component={Login} />
           )}
-          <Route exact path={'/register'} component={Registration} />
-          <Route exact path={'/login'} component={Login} />
+          <Route exact path="/register" component={Registration} />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </Router>
     </div>
