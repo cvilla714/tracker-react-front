@@ -24,12 +24,10 @@ const Expenses = () => {
     ? data.filter((item) => item.user_id === userdata.user.id)
     : [];
 
-  const filterExpensesByUserId = filterByUserid.filter((month) => {
-    return (
-      new Date(month.date).toLocaleString('en-US', { year: 'numeric' }) ===
-      filterYear
-    );
-  });
+  const filterExpensesByUserId = filterByUserid.filter((month) => (
+    new Date(month.date).toLocaleString('en-US', { year: 'numeric' })
+      === filterYear
+  ));
 
   let expensesContent = <h2 className="text-warning">No Expenes Found</h2>;
 
