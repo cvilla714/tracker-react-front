@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import ExpenseDate from './ExpenseDate';
 import './Expenseitem.css';
-import Card from '../Ui/Card';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import PropTypes from 'prop-types';
+import Card from '../Ui/Card';
+import ExpenseDate from './ExpenseDate';
 import useForm from '../Hooks/useForm';
 import {
   useUpdateExpensesMutation,
@@ -11,7 +12,9 @@ import {
   useDeleteExpenseMutation,
 } from '../../features/user/statusSlice';
 
-const ExpenseItem = ({ date, title, amount, id }) => {
+const ExpenseItem = ({
+  date, title, amount, id,
+}) => {
   const { form, handleChange, clearForm } = useForm({
     title: '',
     amount: '',
@@ -28,7 +31,6 @@ const ExpenseItem = ({ date, title, amount, id }) => {
   const handleShow = (e) => {
     setShow(true);
     let expenseinfo = data.find((item) => item.id === +e.target.id);
-    console.log(expenseinfo);
 
     expenseinfo = {
       title: form.title,
@@ -131,4 +133,10 @@ const ExpenseItem = ({ date, title, amount, id }) => {
   );
 };
 
+ExpenseItem.propTypes = {
+  date: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired,
+};
 export default ExpenseItem;
