@@ -13,9 +13,7 @@ const useForm = () => {
   const [form, setForm] = useState(InitialState);
 
   const handleChange = ({ target }) => {
-    setForm((prevState) => {
-      return { ...prevState, [target.name]: target.value };
-    });
+    setForm((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
 
   const clearForm = () => {
