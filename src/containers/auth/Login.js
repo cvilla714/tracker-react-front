@@ -1,15 +1,17 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
+import useRedirect from '../../components/Hooks/useRedirect';
 import useForm from '../../components/Hooks/useForm';
 import { useUserSessionMutation } from '../../features/user/statusSlice';
 
-const Login = (props) => {
+const Login = () => {
   const { form, handleChange, clearForm } = useForm({
     email: '',
     password: '',
   });
-  const history = useHistory();
+  // const history = useHistory();
+  const { redirect } = useRedirect();
   const [userSession] = useUserSessionMutation();
 
   const handleSubmit = (event) => {
@@ -21,7 +23,8 @@ const Login = (props) => {
       },
     };
     userSession(userData);
-    history.push('/');
+    // history.push('/');
+    redirect('/');
     clearForm();
   };
 
