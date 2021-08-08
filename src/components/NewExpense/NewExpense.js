@@ -16,7 +16,7 @@ const NewExpense = () => {
     <div className="new-expense">
       {isShowingForm && <ExpenseForm onCancel={stopShowingForm} />}
       {!isShowingForm && (
-        <button type="clicked" onClick={showtheForm}>
+        <button type="button" onClick={showtheForm}>
           Add New Expense
         </button>
       )}
