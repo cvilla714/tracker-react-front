@@ -1,10 +1,14 @@
 import React from 'react';
 import './ExpenseForm.css';
-import { usePostUserExpensesMutation } from '../../features/user/statusSlice';
-import { useGetLoginUserInfoQuery } from '../../features/user/statusSlice';
+import PropTypes from 'prop-types';
+import {
+  usePostUserExpensesMutation,
+  useGetLoginUserInfoQuery,
+} from '../../features/user/statusSlice';
+
 import useForm from '../Hooks/useForm';
 
-const ExpenseForm = (props) => {
+const ExpenseForm = ({ onCancel }) => {
   const { form, handleChange, clearForm } = useForm({
     title: '',
     amount: '',
@@ -31,47 +35,57 @@ const ExpenseForm = (props) => {
     <form action="" onSubmit={handleSubmit}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
-          <label htmlFor="">Title</label>
-          <input
-            type="text"
-            name="title"
-            value={form.title}
-            onChange={handleChange}
-            required
-          />
+          <label htmlFor="title">
+            Title
+            <input
+              type="text"
+              name="title"
+              value={form.title}
+              onChange={handleChange}
+              required
+            />
+          </label>
         </div>
         <div className="new-expense__control">
-          <label htmlFor="">Amount</label>
-          <input
-            type="number"
-            min="0.01"
-            step="0.01"
-            name="amount"
-            value={form.amount}
-            onChange={handleChange}
-            required
-          />
+          <label htmlFor="amount">
+            Amount
+            <input
+              type="number"
+              min="0.01"
+              step="0.01"
+              name="amount"
+              value={form.amount}
+              onChange={handleChange}
+              required
+            />
+          </label>
         </div>
         <div className="new-expense__control">
-          <label htmlFor="">Date</label>
-          <input
-            type="date"
-            min="2019-01-01"
-            max="2022-12-31"
-            name="date"
-            value={form.date}
-            onChange={handleChange}
-            required
-          />
+          <label htmlFor="date">
+            Date
+            <input
+              type="date"
+              min="2019-01-01"
+              max="2022-12-31"
+              name="date"
+              value={form.date}
+              onChange={handleChange}
+              required
+            />
+          </label>
         </div>
       </div>
       <div className="new-expense__actions">
-        <button type="button" onClick={props.onCancel}>
+        <button type="button" onClick={onCancel}>
           Cancel
         </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
   );
+};
+
+ExpenseForm.propTypes = {
+  onCancel: PropTypes.func.isRequired,
 };
 export default ExpenseForm;
