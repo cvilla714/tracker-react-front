@@ -5,7 +5,7 @@ import NavigationBar from '../components/Navbar';
 import { Provider } from 'react-redux';
 import store from '../app/store';
 
-describe('<Navbar />', () => {
+describe('<NavigationBar />', () => {
   let component;
 
   beforeEach(() => {
@@ -20,5 +20,13 @@ describe('<Navbar />', () => {
 
   test('It should render', () => {
     component.getByText('Expenses Tracker');
+  });
+
+  test('It should  have a link to Home', () => {
+    component.getByText('Home');
+  });
+
+  test('It should  have a link to Login', () => {
+    component.getByText('Login');
   });
 });
