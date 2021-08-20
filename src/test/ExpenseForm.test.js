@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import ExpenseForm from '../components/NewExpense/ExpenseForm';
 import { Provider } from 'react-redux';
+import ExpenseForm from '../components/NewExpense/ExpenseForm';
 import store from '../app/store';
 
 describe('ExpenseForm Component', () => {
