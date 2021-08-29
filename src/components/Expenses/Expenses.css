@@ -8,3 +8,28 @@
   /* border-radius: 12px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25); */
 }
+
+.paginationBttns {
+  width: 80%;
+  height: 2.5rem;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 0.625rem;
+  margin: 0.5rem;
+  border-radius: 0.3125rem;
+  border: 1pz solid #2b2e;
+  color: #2b2e !important;
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  background-color: yellow;
+}
+
+.paginationActive a {
+  background-color: yellow;
+}
