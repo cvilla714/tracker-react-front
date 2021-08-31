@@ -18,15 +18,15 @@
   padding: 0.625rem;
   margin: 0.5rem;
   border-radius: 0.3125rem;
-  border: 1pz solid #2b2e;
+  border: 1px solid #2b2e;
   color: #2b2e !important;
   cursor: pointer;
 }
 
-.paginationBttns a:hover {
+.paginationActive a {
   background-color: yellow;
 }
 
-.paginationActive a {
+.paginationBttns a:hover {
   background-color: yellow;
 }
