@@ -13,7 +13,7 @@ export const createUser = createAsyncThunk(
     } = getState();
     return axios
       .post(
-        'http://localhost:3001/registrations',
+        'https://lavista-authentication-api.herokuapp.com/registrations',
         {
           user: {
             email,
