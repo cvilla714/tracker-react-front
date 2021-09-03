@@ -3,8 +3,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const checkLoginStatusapi = createApi({
   reducerPath: 'checkLoginStatus',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://lavista-authentication-api.herokuapp.com',
+    // baseUrl: 'https://lavista-authentication-api.herokuapp.com',
+    baseUrl: 'http://localhost:3001',
     credentials: 'include',
+    mode: 'cors',
   }),
   tagTypes: ['Session', 'Expenses'],
   endpoints: (builder) => ({
