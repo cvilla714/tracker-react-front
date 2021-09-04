@@ -4,7 +4,6 @@ export const checkLoginStatusapi = createApi({
   reducerPath: 'checkLoginStatus',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://lavista-authentication-api.herokuapp.com',
-    // baseUrl: 'http://localhost:3001',
     credentials: 'include',
     mode: 'cors',
   }),
@@ -31,7 +30,7 @@ export const checkLoginStatusapi = createApi({
       invalidatesTags: ['Session'],
     }),
     getLoginUserInfo: builder.query({
-      query: () => 'logged_in',
+      query: () => 'logged_in/',
       providesTags: ['Session'],
     }),
 
@@ -44,7 +43,7 @@ export const checkLoginStatusapi = createApi({
       },
     }),
     getUserExpenses: builder.query({
-      query: () => 'expenses',
+      query: () => 'expenses/',
       providesTags: ['Expenses'],
     }),
     postUserExpenses: builder.mutation({
