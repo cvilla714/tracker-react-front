@@ -31,7 +31,7 @@ export const checkLoginStatusapi = createApi({
       invalidatesTags: ['Session'],
     }),
     getLoginUserInfo: builder.query({
-      query: () => 'logged_in/',
+      query: () => 'logged_in',
       providesTags: ['Session'],
     }),
 
