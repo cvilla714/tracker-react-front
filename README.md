@@ -2,6 +2,7 @@
 
 > Project was about creating a Tracker-Expenses
 > basically connecting to a REST API built in Rails
+> more changes to
 > and using React to display all of the Expenses
 > ![screenshot](./tracker.png)
 
